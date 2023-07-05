@@ -4,8 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.kapt)
-//    id 'kotlin-kapt'
-//    id 'de.mannodermaus.android-junit5'
+    alias(libs.plugins.junit5)
 }
 
 android {
@@ -16,6 +15,7 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", "\"${"ee"}\"")
     }
 
     buildTypes {
@@ -35,6 +35,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.hilt.android)
+    implementation(libs.kotlinx.serialization.json)
     kapt(libs.hilt.android.compiler)
 
 
@@ -66,8 +68,11 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-//    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
-//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
-//    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.8.2"
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.vintage.engine)
+    testImplementation(libs.kotlinx.coroutines.test)
 
+    implementation(libs.okhttp.mockserver)
+    testImplementation(libs.androidx.arch.core)
 }

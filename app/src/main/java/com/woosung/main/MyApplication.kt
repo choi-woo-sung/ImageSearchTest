@@ -1,7 +1,7 @@
 package com.woosung.main
 
 import android.app.Application
-import androidx.viewbinding.BuildConfig
+import com.woosung.data.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
