@@ -1,4 +1,4 @@
-package com.woosung.data
+package com.woosung.detail
 
 import org.junit.Test
 

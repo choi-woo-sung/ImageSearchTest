@@ -1,0 +1,63 @@
+[versions]
+androidGradlePlugin = "8.0.0"
+androidxCore = "1.10.1"
+appcompat = "1.6.1"
+material = "1.9.0"
+androidxNavigation = "2.6.0"
+hilt = "2.45"
+junit = "4.13.2"
+androidxTestExt = "1.1.5"
+espresso-core = "3.5.1"
+coil = "2.3.0"
+kotlinxCoroutines = "1.6.4"
+kotlin = "1.8.21"
+ksp = "1.8.21-1.0.11"
+
+minSdk = "21"
+targetSdk = "33"
+junit5 = "5.8.2"
+pluginjunit5 = "1.8.2.1"
+
+[libraries]
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidxNavigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidxNavigation" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExt" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
+constraint-layout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
+
+
+okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.10.0" }
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version = "4.10.0" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version = "2.9.0" }
+retrofit-kotlinx-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version = "0.8.0" }
+
+
+
+timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+androidx-activity = { module = "androidx.activity:activity-ktx", version = "1.7.2" }
+androidx-fragment = { module = "androidx.fragment:fragment-ktx", version = "1.6.0" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "pluginjunit5" }
+
+androidx-navigation-safe-args = { id = "androidx.navigation.safeargs", version.ref = "androidxNavigation" }
+
