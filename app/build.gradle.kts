@@ -47,7 +47,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":presentation:search"))
-    implementation(project(":presentation:detail"))
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.ktx)

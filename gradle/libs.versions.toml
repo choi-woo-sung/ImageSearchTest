@@ -13,7 +13,7 @@ kotlinxCoroutines = "1.6.4"
 kotlin = "1.8.21"
 ksp = "1.8.21-1.0.11"
 
-minSdk = "21"
+minSdk = "24"
 targetSdk = "33"
 junit5 = "5.8.2"
 pluginjunit5 = "1.8.2.1"
@@ -23,6 +23,9 @@ turbine = "0.12.3"
 androidxArchCore = "2.2.0"
 
 kotlinxSerialization = "1.5.0"
+
+paging = "3.1.1"
+pagingTesting = "3.2.0-rc01"
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -58,11 +61,15 @@ androidx-fragment = { module = "androidx.fragment:fragment-ktx", version = "1.6.
 androidx-arch-core = { module = "androidx.arch.core:core-testing", version.ref = "androidxArchCore" }
 
 
+androidx-paging = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
+androidx-paging-common = { module = "androidx.paging:paging-common-ktx", version.ref = "paging" }
+
 # test
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
 junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit5" }
 turbin = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "pagingTesting" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

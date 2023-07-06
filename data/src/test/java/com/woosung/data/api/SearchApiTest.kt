@@ -1,7 +1,6 @@
 package com.woosung.data.api
 
 import com.woosung.data.ApiAbstract
-import com.woosung.data.remote.SearchAPI
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions
