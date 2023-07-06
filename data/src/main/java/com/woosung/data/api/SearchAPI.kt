@@ -1,4 +1,4 @@
-package com.woosung.data.remote
+package com.woosung.data.api
 
 import com.woosung.data.model.remote.SearchImageResponse
 import com.woosung.data.model.remote.SearchVideoResponse

@@ -1,6 +1,6 @@
 package com.woosung.data.di
 
-import com.woosung.data.remote.SearchAPI
+import com.woosung.data.api.SearchAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

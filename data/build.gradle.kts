@@ -75,4 +75,9 @@ dependencies {
 
     implementation(libs.okhttp.mockserver)
     testImplementation(libs.androidx.arch.core)
+
+    implementation(libs.androidx.paging)
+    testImplementation(libs.androidx.paging.common)
+    implementation(libs.androidx.paging.testing)
+
 }

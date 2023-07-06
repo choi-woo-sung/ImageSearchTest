@@ -1,5 +1,7 @@
 package com.woosung.data.model.remote
 
+import com.woosung.data.model.DataModel
+import com.woosung.data.model.ResponseModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,4 +15,4 @@ import kotlinx.serialization.Serializable
 internal data class SearchImageResponse(
     @SerialName("documents") val documents: List<ImageResponse>,
     @SerialName("meta") val meta: MetaResponse,
-)
+) : ResponseModel
