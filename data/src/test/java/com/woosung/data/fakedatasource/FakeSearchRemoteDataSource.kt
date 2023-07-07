@@ -8,115 +8,95 @@ import com.woosung.domain.model.SearchImage
 import com.woosung.domain.model.SearchVideo
 import com.woosung.domain.model.Video
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.util.Calendar
 import java.util.Date
+import kotlin.random.Random
 
 class FakeSearchSuccessRemoteDataSourceImp : SearchRemoteDataSource {
     override suspend fun fetchSearchImage(query: String, page: Int): SearchImage = SearchImage(
         info = Info(
-            totalCount = 9176,
-            pageableCount = 1182,
-            isEnd = false
-        ), imageList = FakeData.fakeImage
+            totalCount = 9176, pageableCount = 1182, isEnd = false
+        ), imageList = FakeData.fakeImage[page - 1]
     )
 
-    override suspend fun fetchSearchVideo(query: String, page: Int): SearchVideo =
-        SearchVideo(
-            info = Info(
-                totalCount = 7606,
-                pageableCount = 9200,
-                isEnd = false
-            ), videoList = FakeData.fakeVideo
-        )
+    override suspend fun fetchSearchVideo(query: String, page: Int): SearchVideo = SearchVideo(
+        info = Info(
+            totalCount = 7606, pageableCount = 9200, isEnd = false
+        ), videoList = FakeData.fakeVideo[page - 1]
+    )
 }
 
 object FakeData {
-    val fakeVideo: List<Video> = listOf(
-        Video(
-            thumbnail = "테스트비디오1",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오2",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오3",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오4",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오5",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오6",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오7",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오8",
-            dateTime = executeDateRandom()
-        ),
-        Video(
-            thumbnail = "테스트비디오9",
-            dateTime = executeDateRandom()
+    val fakeVideo: List<List<Video>> = listOf(
+        listOf(
+            Video(
+                thumbnail = "테스트비디오1", dateTime = executeDateRandom()
+            ), Video(
+                thumbnail = "테스트비디오2", dateTime = executeDateRandom()
+            ), Video(
+                thumbnail = "테스트비디오3", dateTime = executeDateRandom()
+            )
+        ), listOf(
+            Video(
+                thumbnail = "테스트비디오4", dateTime = executeDateRandom()
+            ), Video(
+                thumbnail = "테스트비디오5", dateTime = executeDateRandom()
+            ), Video(
+                thumbnail = "테스트비디오6", dateTime = executeDateRandom()
+            )
+        ), listOf(
+            Video(
+                thumbnail = "테스트비디오7", dateTime = executeDateRandom()
+            ), Video(
+                thumbnail = "테스트비디오8", dateTime = executeDateRandom()
+            ), Video(
+                thumbnail = "테스트비디오9", dateTime = executeDateRandom()
+            )
         )
     )
 
-    val fakeImage: List<Image> = listOf(
-        Image(
-            thumbnailUrl = "테스트이미지1",
-            dateTime = executeDateRandom()
+    val fakeImage: List<List<Image>> = listOf(
+        listOf(
+            Image(
+                thumbnailUrl = "테스트이미지1", dateTime = executeDateRandom()
+            ),
+            Image(
+                thumbnailUrl = "테스트이미지2", dateTime = executeDateRandom()
+            ),
+            Image(
+                thumbnailUrl = "테스트이미지3", dateTime = executeDateRandom()
+            ),
+            Image(
+                thumbnailUrl = "테스트이미지4", dateTime = executeDateRandom()
+            ),
         ),
-        Image(
-            thumbnailUrl = "테스트이미지2",
-            dateTime = executeDateRandom()
+        listOf(
+            Image(
+                thumbnailUrl = "테스트이미지5", dateTime = executeDateRandom()
+            ), Image(
+                thumbnailUrl = "테스트이미지6", dateTime = executeDateRandom()
+            ), Image(
+                thumbnailUrl = "테스트이미지7", dateTime = executeDateRandom()
+            ), Image(
+                thumbnailUrl = "테스트이미지8", dateTime = executeDateRandom()
+            ), Image(
+                thumbnailUrl = "테스트이미지9", dateTime = executeDateRandom()
+            )
         ),
-        Image(
-            thumbnailUrl = "테스트이미지3",
-            dateTime = executeDateRandom()
-        ),
-        Image(
-            thumbnailUrl = "테스트이미지4",
-            dateTime = executeDateRandom()
-        ),
-        Image(
-            thumbnailUrl = "테스트이미지5",
-            dateTime = executeDateRandom()
-        ),
-        Image(
-            thumbnailUrl = "테스트이미지6",
-            dateTime = executeDateRandom()
-        ),
-        Image(
-            thumbnailUrl = "테스트이미지7",
-            dateTime = executeDateRandom()
-        ),
-        Image(
-            thumbnailUrl = "테스트이미지8",
-            dateTime = executeDateRandom()
-        ),
-        Image(
-            thumbnailUrl = "테스트이미지9",
-            dateTime = executeDateRandom()
-        ),
+        listOf()
     )
 }
 
 fun executeDateRandom(): DateTime {
-    val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    val currentTime = System.currentTimeMillis()
-    val random = kotlin.random.Random(currentTime)
+    val start = Calendar.getInstance().apply {
+        set(2021, 0, 1, 0, 0, 0)
+    }.time.time
+    val end = Calendar.getInstance().apply {
+        set(2022, 0, 1, 0, 0, 0)
+    }.time.time
 
-    // Randomly generate number of minutes to add/subtract (up to 1 day)
-    val deltaMinutes = random.nextInt(1440) - 720
-
-    val newDateTime = Date(currentTime + deltaMinutes * 60 * 1000)
-    return DateTime(newDateTime)
+    val randomTimeMillis = Random.nextLong(start, end)
+    return DateTime(Date(randomTimeMillis))
 }

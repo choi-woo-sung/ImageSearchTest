@@ -27,8 +27,8 @@ class SearchPagingSource(
 
             val data = mutableListOf<Document>()
 
-            data.addAll(imageResponse.imageList)
-            data.addAll(vClipResponse.videoList)
+            if(imageResponse.imageList.isNotEmpty()) data.addAll(imageResponse.imageList)
+            if(vClipResponse.videoList.isNotEmpty())data.addAll(vClipResponse.videoList)
 
             LoadResult.Page(
                 // dateTime 내림차순 정렬

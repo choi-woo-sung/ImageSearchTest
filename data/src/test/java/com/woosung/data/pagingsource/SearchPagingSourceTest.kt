@@ -37,20 +37,32 @@ class SearchPagingSourceTest {
                 config = PagingConfig(pageSize = 3), pagingSource = searchPagingSource
             )
 
-            val page = with(pager) {
+            with(pager) {
                 refresh()
                 append()
                 append()
-            } as PagingSource.LoadResult.Page
-
-            val testList = mutableListOf<Document>().apply {
-                addAll(FakeData.fakeImage)
-                addAll(FakeData.fakeVideo)
             }
 
+            val testList = mutableListOf<Document>()
+
+            for (i in 0 until FakeData.fakeImage.size) {
+                val sortList = mutableListOf<Document>().run {
+                    addAll(FakeData.fakeImage[i])
+                    addAll(FakeData.fakeVideo[i])
+                    sortedByDescending { it.dateTime.time() }
+                }
+                testList.addAll(sortList)
+            }
+            val result = pager.getPages().flatten().size
+
             Assertions.assertEquals(
-                page.data,
-                testList.sortedByDescending { it.dateTime.time() }
+                result,
+                testList.size
+            )
+
+            Assertions.assertEquals(
+                pager.getPages().flatten(),
+                testList
             )
         }
     }

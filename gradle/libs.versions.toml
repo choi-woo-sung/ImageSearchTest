@@ -71,6 +71,8 @@ junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", vers
 turbin = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "pagingTesting" }
 
+javax-inject = { module = "javax.inject:javax.inject", version = "1" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
