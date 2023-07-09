@@ -1,5 +1,6 @@
 package com.woosung.data.di
 
+import com.woosung.data.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -9,7 +10,7 @@ class HttpRequestInterceptor : Interceptor {
             .newBuilder()
             .addHeader(
                 "Authorization",
-                "KakaoAK 48809a065a684fbbb9060b8acbbbf557"
+                BuildConfig.API_KEY
             )
             .build()
         return chain.proceed(request)

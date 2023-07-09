@@ -3,18 +3,24 @@ package com.woosung.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import androidx.paging.insertSeparators
+import androidx.paging.map
 import com.woosung.domain.model.Document
 import com.woosung.domain.usecase.GetBookMarkImageUseCase
 import com.woosung.domain.usecase.GetImageForPagingUseCase
 import com.woosung.domain.usecase.ToggleBookMarkUseCase
+import com.woosung.search.model.PagingModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +35,10 @@ class SearchViewModel @Inject constructor(
         MutableStateFlow(emptyList())
     val storeDocumentListFlow = _storeDocumentListFlow.asStateFlow()
 
+    private val _errorHandler = CoroutineExceptionHandler { _, exception ->
+        handleException(exception)
+    }
+
 
     init {
         _storeDocumentListFlow.value = getBookMarkImageUseCase()
@@ -37,7 +47,30 @@ class SearchViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val pagingFlow = _queryFlow.flatMapLatest {
         getImageForPagingUseCase(it)
-    }.cachedIn(viewModelScope)
+    }.map { pagingData ->
+        pagingData.map {
+            PagingModel.RepoItem(it.document, it.key)
+        }
+    }.map { pagingModel ->
+        pagingModel.insertSeparators { before, after ->
+            if (after == null) {
+                return@insertSeparators null
+            }
+
+            if (before == null) {
+                return@insertSeparators PagingModel.HeaderItem(after.pageNum)
+            }
+
+            if (before.pageNum != after.pageNum) {
+                return@insertSeparators PagingModel.HeaderItem(after.pageNum)
+            } else {
+                return@insertSeparators null
+            }
+
+
+        }
+    }
+        .cachedIn(viewModelScope)
 
 
     fun handleQuery(query: String) {
@@ -47,9 +80,18 @@ class SearchViewModel @Inject constructor(
     }
 
 
-    fun toggle(document: Document) = viewModelScope.launch {
+    fun toggle(document: Document) = viewModelScope.launch(_errorHandler) {
         toggleBookMarkUseCase(document)
         val result = getBookMarkImageUseCase()
         _storeDocumentListFlow.update { result }
+    }
+
+    /**
+     * Coroutine Task 실행하며 감지되지 않은 예외케이스를 처리 합니다.
+     *
+     * @param 감지되지 않은 예외
+     */
+    fun handleException(exception: Throwable) {
+        Timber.e(exception)
     }
 }

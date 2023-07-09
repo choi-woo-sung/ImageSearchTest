@@ -8,6 +8,7 @@ import com.woosung.data.local.SearchSharedPreference
 import com.woosung.data.remote.SearchRemoteDataSource
 import com.woosung.data.source.SearchPagingSource
 import com.woosung.domain.model.Document
+import com.woosung.domain.model.DocumentWithKey
 import com.woosung.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,10 +18,10 @@ internal class SearchRepositoryImpl @Inject constructor(
     private val searchSharedPreference: SearchSharedPreference
 ) : SearchRepository {
 
-    override suspend fun fetchSearchImage(query: String): Flow<PagingData<Document>> {
+    override suspend fun fetchSearchImage(query: String): Flow<PagingData<DocumentWithKey>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 10,
+                pageSize = 20,
                 enablePlaceholders = false,
             ),
             pagingSourceFactory = {

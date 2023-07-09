@@ -39,6 +39,7 @@ class ImageSearchFragment :
                     }
                 }
                 launch {
+
                     adapter.loadStateFlow.collectLatest {
                         // 검색 결과 이벤트 처리
                         when (val currentState = it.refresh) {
