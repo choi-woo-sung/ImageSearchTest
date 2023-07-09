@@ -1,15 +1,12 @@
 package com.woosung.data.fakedatasource
 
-import com.woosung.domain.datasource.SearchRemoteDataSource
+import com.woosung.data.remote.SearchRemoteDataSource
 import com.woosung.domain.model.DateTime
 import com.woosung.domain.model.Image
 import com.woosung.domain.model.Info
 import com.woosung.domain.model.SearchImage
 import com.woosung.domain.model.SearchVideo
 import com.woosung.domain.model.Video
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.util.Calendar
 import java.util.Date
 import kotlin.random.Random
@@ -32,27 +29,27 @@ object FakeData {
     val fakeVideo: List<List<Video>> = listOf(
         listOf(
             Video(
-                thumbnail = "테스트비디오1", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오1", date = executeDateRandom()
             ), Video(
-                thumbnail = "테스트비디오2", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오2", date = executeDateRandom()
             ), Video(
-                thumbnail = "테스트비디오3", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오3", date = executeDateRandom()
             )
         ), listOf(
             Video(
-                thumbnail = "테스트비디오4", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오4", date = executeDateRandom()
             ), Video(
-                thumbnail = "테스트비디오5", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오5", date = executeDateRandom()
             ), Video(
-                thumbnail = "테스트비디오6", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오6", date = executeDateRandom()
             )
         ), listOf(
             Video(
-                thumbnail = "테스트비디오7", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오7", date = executeDateRandom()
             ), Video(
-                thumbnail = "테스트비디오8", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오8", date = executeDateRandom()
             ), Video(
-                thumbnail = "테스트비디오9", dateTime = executeDateRandom()
+                thumbnail = "테스트비디오9", date = executeDateRandom()
             )
         )
     )
@@ -60,29 +57,29 @@ object FakeData {
     val fakeImage: List<List<Image>> = listOf(
         listOf(
             Image(
-                thumbnailUrl = "테스트이미지1", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지1", date = executeDateRandom()
             ),
             Image(
-                thumbnailUrl = "테스트이미지2", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지2", date = executeDateRandom()
             ),
             Image(
-                thumbnailUrl = "테스트이미지3", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지3", date = executeDateRandom()
             ),
             Image(
-                thumbnailUrl = "테스트이미지4", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지4", date = executeDateRandom()
             ),
         ),
         listOf(
             Image(
-                thumbnailUrl = "테스트이미지5", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지5", date = executeDateRandom()
             ), Image(
-                thumbnailUrl = "테스트이미지6", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지6", date = executeDateRandom()
             ), Image(
-                thumbnailUrl = "테스트이미지7", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지7", date = executeDateRandom()
             ), Image(
-                thumbnailUrl = "테스트이미지8", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지8", date = executeDateRandom()
             ), Image(
-                thumbnailUrl = "테스트이미지9", dateTime = executeDateRandom()
+                thumbnailUrl = "테스트이미지9", date = executeDateRandom()
             )
         ),
         listOf()

@@ -2,7 +2,7 @@ package com.woosung.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.woosung.domain.datasource.SearchRemoteDataSource
+import com.woosung.data.remote.SearchRemoteDataSource
 import com.woosung.domain.model.Document
 
 class SearchPagingSource(
@@ -43,7 +43,5 @@ class SearchPagingSource(
 
     companion object {
         const val defaultStart = 1 // 기본 시작값
-        const val defaultImageDisplay = 80 // 이미지 표시값
-        const val defaultVClipDisplay = 30 // VClip 표시값
     }
 }

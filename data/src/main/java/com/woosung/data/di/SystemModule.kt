@@ -1,10 +1,14 @@
-package com.kts6056.data.di
+package com.woosung.data.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.kts6056.data.CoroutineDispatcherProviderImpl
 import com.woosung.domain.CoroutineDispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,4 +19,11 @@ internal object SystemModule {
     @Singleton
     fun provideCoroutineDispatcherProvider(): CoroutineDispatcherProvider =
         CoroutineDispatcherProviderImpl()
+
+
+
+    @Provides
+    @Singleton
+    fun sharedPreferences(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences("woosung", Context.MODE_PRIVATE)
 }

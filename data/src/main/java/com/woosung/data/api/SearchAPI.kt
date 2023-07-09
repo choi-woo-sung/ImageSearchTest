@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 internal interface SearchAPI {
 
-    @GET("image")
+    @GET("v2/search/image")
     suspend fun searchImagePerPage(
         @Query("query") query: String,
         @Query("sort") sort: String = "recency",
@@ -15,7 +15,7 @@ internal interface SearchAPI {
         @Query("size") size: Int = 10,
     ): SearchImageResponse
 
-    @GET("vclip")
+    @GET("v2/search/vclip")
     suspend fun searchVideoPerPage(
         @Query("query") query: String,
         @Query("sort") sort: String = "recency",

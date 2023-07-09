@@ -12,7 +12,7 @@ internal object ImageResponseMapper : Mapper<ImageResponse, Image> {
             thumbnailUrl = thumbnailUrl,
             width = width,
             height = height,
-            dateTime = DateTime.fromTime(dateTime),
+            date = DateTime.fromTime(dateTime),
         )
     }
 }

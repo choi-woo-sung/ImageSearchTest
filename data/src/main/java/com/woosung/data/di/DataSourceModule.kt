@@ -1,7 +1,9 @@
 package com.woosung.data.di
 
+import com.woosung.data.local.SearchSharedPreference
+import com.woosung.data.local.SearchSharedPreferenceImpl
+import com.woosung.data.remote.SearchRemoteDataSource
 import com.woosung.data.remote.SearchRemoteDataSourceImpl
-import com.woosung.domain.datasource.SearchRemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,4 +18,9 @@ internal abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun bindSearchDataSource(searchDataSourceImpl: SearchRemoteDataSourceImpl): SearchRemoteDataSource
+
+
+    @Binds
+    @Singleton
+    abstract fun bindSearchPreferenceDataSource(searchDataSourceImpl: SearchSharedPreferenceImpl): SearchSharedPreference
 }

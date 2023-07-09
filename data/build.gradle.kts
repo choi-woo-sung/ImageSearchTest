@@ -15,7 +15,8 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_KEY", "\"${"ee"}\"")
+        buildConfigField("String", "API_KEY", "\"${"KakaoAK 0be1e1f0799c33fd5f68336e53ff05ba"}\"")
+        buildConfigField("String", "BASE_URL", "\"${"https://dapi.kakao.com"}\"")
     }
 
     buildTypes {

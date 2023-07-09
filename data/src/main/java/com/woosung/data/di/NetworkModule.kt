@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,20 +21,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
 
-    @Provides
-    @Singleton
-    fun provideHttpLoggingInterceptor() = HttpLoggingInterceptor().apply {
-        level = if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor.Level.BASIC
-        } else {
-            HttpLoggingInterceptor.Level.NONE
+    private val json by lazy {
+        Json {
+            coerceInputValues = true
+            ignoreUnknownKeys = true
         }
     }
 
     @Provides
     @Singleton
+    fun provideHttpLoggingInterceptor(): Interceptor = HttpRequestInterceptor()
+
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor,
+        httpLoggingInterceptor: Interceptor,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
@@ -48,8 +51,8 @@ internal object NetworkModule {
     ): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .addConverterFactory(
-            Json.asConverterFactory("application/json".toMediaType()),
+            json.asConverterFactory("application/json".toMediaType()),
         )
-        .baseUrl(BuildConfig.API_KEY)
+        .baseUrl(BuildConfig.BASE_URL)
         .build()
 }

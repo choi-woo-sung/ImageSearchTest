@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.androidx.navigation.safe.args)
 }
 
 android {

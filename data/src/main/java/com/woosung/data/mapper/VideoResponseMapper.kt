@@ -8,7 +8,7 @@ internal object VideoResponseMapper : Mapper<VideoResponse, Video> {
     override fun mapDomain(input: VideoResponse): Video = with(input) {
         Video(
             title = title,
-            dateTime = DateTime.fromTime(dateTime),
+            date = DateTime.fromTime(dateTime),
             thumbnail = thumbnail
         )
     }
