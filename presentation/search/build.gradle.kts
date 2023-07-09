@@ -50,11 +50,14 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
 
     implementation(libs.hilt.android)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.hilt.android.compiler)
 
     implementation(libs.coil)
 
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.glide)
+    implementation(libs.androidx.paging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

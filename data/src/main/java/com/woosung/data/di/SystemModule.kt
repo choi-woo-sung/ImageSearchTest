@@ -1,7 +1,7 @@
 package com.kts6056.data.di
 
 import com.kts6056.data.CoroutineDispatcherProviderImpl
-import com.kts6056.domain.CoroutineDispatcherProvider
+import com.woosung.domain.CoroutineDispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -26,6 +26,7 @@ kotlinxSerialization = "1.5.0"
 
 paging = "3.1.1"
 pagingTesting = "3.2.0-rc01"
+swiperefreshlayout = "1.1.0"
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -72,7 +73,8 @@ turbin = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "pagingTesting" }
 
 javax-inject = { module = "javax.inject:javax.inject", version = "1" }
-
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+glide = {module = "com.github.bumptech.glide:glide"  ,version = "4.15.1"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }

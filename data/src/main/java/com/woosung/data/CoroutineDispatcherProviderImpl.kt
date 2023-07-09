@@ -1,6 +1,6 @@
 package com.kts6056.data
 
-import com.kts6056.domain.CoroutineDispatcherProvider
+import com.woosung.domain.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 

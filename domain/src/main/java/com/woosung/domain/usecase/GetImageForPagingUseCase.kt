@@ -5,7 +5,6 @@ import com.woosung.domain.model.Document
 import com.woosung.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-
 class GetImageForPagingUseCase @Inject constructor(
     private val repository: SearchRepository
 ) {

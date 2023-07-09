@@ -8,7 +8,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseActivity<BINDING : ViewBinding>(
     private val inflater: (LayoutInflater) -> BINDING,
 ) : AppCompatActivity() {
-    private val binding: BINDING by lazy { inflater(layoutInflater) }
+    val binding: BINDING by lazy { inflater(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,9 +16,10 @@ abstract class BaseActivity<BINDING : ViewBinding>(
         initView()
     }
 
+    /**
+     * 뷰를 초기화하는 메서드
+     *
+     */
     open fun initView() {}
 
-    protected fun <T> binding(action: BINDING.() -> T): T {
-        return binding.action()
-    }
 }
