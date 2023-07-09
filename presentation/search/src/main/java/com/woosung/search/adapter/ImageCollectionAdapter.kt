@@ -1,44 +1,36 @@
 package com.woosung.search.adapter
 
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.woosung.domain.model.Document
 import com.woosung.domain.model.Image
 import com.woosung.domain.model.Video
 
 /**
- * 이미지 검색 List Adapter
+ * 이미지 보관함 List Adapter
  *
  * @property toggleListener : toggle Event Listener
  */
-class ImageSearchAdapter(private val toggleListener: (Document) -> Unit) :
-    PagingDataAdapter<Document, ImageSearchViewHolder>(comparator) {
-
-    private var collectionDocuments = mutableListOf<Document>() // 보관함에 저장된 Documents
+class ImageCollectionAdapter(private val toggleListener: (Document) -> Unit) :
+    ListAdapter<Document, RecyclerView.ViewHolder>(comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageSearchViewHolder {
         return ImageSearchViewHolder.create(toggleListener, parent)
     }
 
-    override fun onBindViewHolder(holder: ImageSearchViewHolder, position: Int) {
-        val item = getItem(position)
-        if (item != null) {
-            holder.bind(item, collectionDocuments.contains(item))
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ImageSearchViewHolder) {
+            val document = getItem(position)
+            holder.bind(document, true)
         }
     }
 
-    /**
-     * 보관함에 저장된 Documents 표시 갱신 (보관함 저장 여부 확인용)
-     *
-     * @param documents : 보관함 Documents
-     */
-    fun setCollectionDocuments(documents: List<Document>) {
-        this.collectionDocuments = documents.toMutableList()
-        notifyDataSetChanged()
+
+    fun setItems(items: List<Document>) {
+        submitList(items)
     }
-
-
 
     companion object {
         val comparator = object : DiffUtil.ItemCallback<Document>() {

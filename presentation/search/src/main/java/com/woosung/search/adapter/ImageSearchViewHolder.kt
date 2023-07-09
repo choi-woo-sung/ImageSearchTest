@@ -46,7 +46,7 @@ class ImageSearchViewHolder(
                     isFirstResource: Boolean
                 ): Boolean {
                     // 이미지 로드 성공 시 NO IMAGE 미표시
-                    binding.tvNoImage.visibility = View.GONE
+                    binding.tvEmpty.visibility = View.GONE
                     return false
                 }
 
@@ -57,14 +57,14 @@ class ImageSearchViewHolder(
                     isFirstResource: Boolean
                 ): Boolean {
                     // 이미지 로드 실패 시 NO IMAGE 표시
-                    binding.tvNoImage.visibility = View.VISIBLE
+                    binding.tvEmpty.visibility = View.VISIBLE
                     return false
                 }
             }).into(binding.ivImage)
 
         // image toggle
-        binding.ivImage.setOnClickListener {
-            toggleListener.invoke(document)
+        binding.clItem.setOnClickListener {
+            toggleListener(document)
         }
 
         // image 보관 여부 표시

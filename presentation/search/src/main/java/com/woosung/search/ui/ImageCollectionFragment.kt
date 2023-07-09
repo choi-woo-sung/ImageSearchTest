@@ -1,41 +1,40 @@
 package com.woosung.search.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.woosung.core.base.BaseFragment
 import com.woosung.search.SearchViewModel
-import com.woosung.search.databinding.FragmentImageSearchBinding
+import com.woosung.search.adapter.ImageCollectionAdapter
+import com.woosung.search.databinding.FragmentImageCollectionBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
  * Image 보관함 화면
  */
-class ImageCollectionFragment :
-    BaseFragment<FragmentImageSearchBinding>(FragmentImageSearchBinding::inflate) {
 
-    val imageSearchViewModel: SearchViewModel by viewModels()
+@AndroidEntryPoint
+class ImageCollectionFragment :
+    BaseFragment<FragmentImageCollectionBinding>(FragmentImageCollectionBinding::inflate) {
+
+    val imageSearchViewModel: SearchViewModel by activityViewModels()
     override fun initView() {
         binding {
             val adapter = ImageCollectionAdapter {
-                imageSearchViewModel.toggle(it, requireContext())
+                imageSearchViewModel.toggle(it)
             }
             recyclerView.adapter = adapter
 
             viewLifecycleOwner.lifecycleScope.launch {
-                imageSearchViewModel.dataFlow.collectLatest { documents ->
-                    // 데이터 갱신
-                    adapter.setItems(documents)
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    imageSearchViewModel.storeDocumentListFlow.collectLatest { documents ->
+                        adapter.setItems(documents)
+                    }
                 }
             }
-            // 저장 데이터 설정
-            adapter.setItems(PrefRepository(requireContext()).getDocuments())
         }
     }
 }
