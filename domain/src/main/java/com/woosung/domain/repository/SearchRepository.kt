@@ -8,4 +8,7 @@ interface SearchRepository {
     suspend fun fetchSearchImage(
         query: String,
     ): Flow<PagingData<Document>>
+
+    fun getBookmarkList(): List<Document>
+     fun toggleBookmark(document: Document)
 }

@@ -12,8 +12,8 @@ data class Image(
     val thumbnailUrl: String = "",
     val width: Int = 0,
     val height: Int = 0,
-    override val dateTime: DateTime,
-) : Document(dateTime)
+    val date: DateTime,
+) : Document(date)
 
 
 
