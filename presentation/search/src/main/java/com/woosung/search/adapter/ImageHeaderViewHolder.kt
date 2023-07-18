@@ -15,6 +15,7 @@ class ImageHeaderViewHolder(
     }
 
     companion object {
+        //클래스가 로드되는 시점에 초기화
         fun create(parent: ViewGroup): ImageHeaderViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_list_header, parent, false)

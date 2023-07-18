@@ -32,6 +32,7 @@ class ImageCollectionAdapter(private val toggleListener: (Document) -> Unit) :
         submitList(items)
     }
 
+
     companion object {
         val comparator = object : DiffUtil.ItemCallback<Document>() {
             override fun areItemsTheSame(oldItem: Document, newItem: Document): Boolean {

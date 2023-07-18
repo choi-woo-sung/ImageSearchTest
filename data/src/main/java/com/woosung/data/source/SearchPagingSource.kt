@@ -12,7 +12,10 @@ class SearchPagingSource(
 ) : PagingSource<Int, DocumentWithKey>() {
 
     override fun getRefreshKey(state: PagingState<Int, DocumentWithKey>): Int? {
-        TODO("Not yet implemented")
+        return state.anchorPosition?.let { position ->
+            state.closestPageToPosition(position)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(position)?.nextKey?.minus(1)
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DocumentWithKey> {

@@ -33,19 +33,23 @@ internal class SearchRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override fun getBookmarkList(): List<Document> {
+    override fun getBookmarkList(): LinkedHashSet<Document> {
         return searchSharedPreference.getDocuments()
     }
 
+    /**
+     * HashSet이기 때문에 여기도 수정해야함
+     *
+     * @param document
+     */
     override fun toggleBookmark(document: Document) {
         val documents = searchSharedPreference.getDocuments()
         // 기존 보관함 목록 포함여부 확인 후 추가 / 삭제 분기처리
-        if (documents.contains(document)) {
-            searchSharedPreference.removeDocument(document)
-        } else {
+        if (documents.add(document)) {
             searchSharedPreference.addDocument(document)
+        } else {
+            searchSharedPreference.removeDocument(document)
         }
-
     }
 
 }

@@ -31,10 +31,11 @@ class ImageCollectionFragment :
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     imageSearchViewModel.storeDocumentListFlow.collectLatest { documents ->
-                        adapter.setItems(documents)
+                        adapter.setItems(documents.toMutableList())
                     }
                 }
             }
         }
+
     }
 }

@@ -30,16 +30,21 @@ class ImageSearchFragment :
     }
 
     override fun initView() {
+        /**
+         * 여기에 ceh를 안두는 이유는? 어차피 오류하나뜨면 다 전파되서 다 취소된다.
+         */
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
+                    /**
+                     *  반드시 collectLatest , 이전데이터를 무효화하기 떄문에
+                     */
                     imageSearchViewModel.pagingFlow.collectLatest { items ->
                         // 검색 데이터 갱신
                         adapter.submitData(items)
                     }
                 }
                 launch {
-
                     adapter.loadStateFlow.collectLatest {
                         // 검색 결과 이벤트 처리
                         when (val currentState = it.refresh) {
@@ -75,6 +80,7 @@ class ImageSearchFragment :
                     }
                 }
             }
+
         }
 
         binding {

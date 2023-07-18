@@ -13,7 +13,7 @@ interface SearchSharedPreference {
     fun updateDocuments(documents: MutableList<Pair<String, String>>): Unit
     fun removeDocument(document: Document): Unit
     fun getDocumentPairs(): MutableList<Pair<String, String>>
-    fun getDocuments(): List<Document>
+    fun getDocuments(): LinkedHashSet<Document>
 }
 
 
@@ -24,6 +24,9 @@ class SearchSharedPreferenceImpl @Inject constructor(
     private val editor by lazy { pref.edit() }
     private val gson by lazy { Gson() }
 
+
+
+    //콜백flow로 래핑하여 해결했어도 되는 부분이 아니였을까?
 
     /**
      * 단일 Document 저장
@@ -94,8 +97,8 @@ class SearchSharedPreferenceImpl @Inject constructor(
      *
      * @return Document 전체 리스트
      */
-    override fun getDocuments(): List<Document> {
-        val documents = mutableListOf<Document>()
+    override fun getDocuments(): LinkedHashSet<Document> {
+        val documents = linkedSetOf<Document>()
         for (pair in getDocumentPairs()) {
             if (pair.first == IMAGE_DOCUMENTS) {
                 documents.add(gson.fromJson(pair.second, Image::class.java))

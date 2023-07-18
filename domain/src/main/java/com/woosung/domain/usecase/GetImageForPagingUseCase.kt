@@ -7,7 +7,7 @@ import com.woosung.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 class GetImageForPagingUseCase @Inject constructor(
-    private val repository: SearchRepository
+    private val repository: SearchRepository,
 ) {
     suspend operator fun invoke(query: String): Flow<PagingData<DocumentWithKey>> {
         return repository.fetchSearchImage(query = query)

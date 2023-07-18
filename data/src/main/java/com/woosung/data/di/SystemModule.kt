@@ -2,8 +2,7 @@ package com.woosung.data.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
-import com.kts6056.data.CoroutineDispatcherProviderImpl
+import com.woosung.data.CoroutineDispatcherProviderImpl
 import com.woosung.domain.CoroutineDispatcherProvider
 import dagger.Module
 import dagger.Provides

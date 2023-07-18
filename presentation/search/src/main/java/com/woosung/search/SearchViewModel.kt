@@ -31,8 +31,9 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
     private val _queryFlow = MutableSharedFlow<String>()
 
-    private val _storeDocumentListFlow: MutableStateFlow<List<Document>> =
-        MutableStateFlow(emptyList())
+    private val _storeDocumentListFlow: MutableStateFlow<LinkedHashSet<Document>> =
+        MutableStateFlow(linkedSetOf())
+
     val storeDocumentListFlow = _storeDocumentListFlow.asStateFlow()
 
     private val _errorHandler = CoroutineExceptionHandler { _, exception ->
@@ -66,11 +67,8 @@ class SearchViewModel @Inject constructor(
             } else {
                 return@insertSeparators null
             }
-
-
         }
-    }
-        .cachedIn(viewModelScope)
+    }.cachedIn(viewModelScope)
 
 
     fun handleQuery(query: String) {

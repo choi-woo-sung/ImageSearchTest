@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetBookMarkImageUseCase @Inject constructor(
     private val repository: SearchRepository
 ) {
-    operator fun invoke(): List<Document> {
+    operator fun invoke(): LinkedHashSet<Document> {
         return repository.getBookmarkList()
     }
 }

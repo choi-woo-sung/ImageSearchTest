@@ -37,7 +37,7 @@ class SearchPagingSourceTest {
                 config = PagingConfig(pageSize = 3), pagingSource = searchPagingSource
             )
 
-     with(pager) {
+            with(pager) {
                 refresh()
                 append()
                 append()

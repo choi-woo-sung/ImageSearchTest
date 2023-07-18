@@ -10,6 +10,6 @@ interface SearchRepository {
         query: String,
     ): Flow<PagingData<DocumentWithKey>>
 
-    fun getBookmarkList(): List<Document>
+    fun getBookmarkList(): LinkedHashSet<Document>
      fun toggleBookmark(document: Document)
 }

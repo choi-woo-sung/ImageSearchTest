@@ -18,17 +18,24 @@ import com.woosung.search.model.PagingModel
 class ImageSearchAdapter(private val toggleListener: (Document) -> Unit) :
     PagingDataAdapter<PagingModel, ViewHolder>(comparator) {
 
-    private var collectionDocuments = mutableListOf<Document>() // 보관함에 저장된 Documents
+    private var collectionDocuments = linkedSetOf<Document>() // 보관함에 저장된 Documents
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val uiModel = getItem(position)
         uiModel?.let {
             when (uiModel) {
-                is PagingModel.RepoItem -> (holder as ImageSearchViewHolder).bind(
-                    uiModel.document,
-                    collectionDocuments.contains(uiModel.document)
-                )
+                is PagingModel.RepoItem -> {
+                    (holder as ImageSearchViewHolder).bind(
+                        uiModel.document,
+                        // 최악의 경우 O(n)번째 까지 돈다.
+                        // bind마다 호출하기때문에 꽤나 많이 호출될것같음.
+                        // 여기서 비용을 줄인다면?
+                        collectionDocuments.contains(uiModel.document)
+                    )
+                }
 
-                is PagingModel.HeaderItem -> (holder as ImageHeaderViewHolder).bind(uiModel.pageNum)
+                is PagingModel.HeaderItem -> {
+                    (holder as ImageHeaderViewHolder).bind(uiModel.pageNum)
+                }
             }
         }
 
@@ -56,8 +63,8 @@ class ImageSearchAdapter(private val toggleListener: (Document) -> Unit) :
      *
      * @param documents : 보관함 Documents
      */
-    fun setCollectionDocuments(documents: List<Document>) {
-        this.collectionDocuments = documents.toMutableList()
+    fun setCollectionDocuments(documents: LinkedHashSet<Document>) {
+        this.collectionDocuments = documents
         notifyDataSetChanged()
     }
 
