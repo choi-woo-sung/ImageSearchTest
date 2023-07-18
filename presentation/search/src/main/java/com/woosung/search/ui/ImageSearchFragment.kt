@@ -34,16 +34,24 @@ class ImageSearchFragment :
          * 여기에 ceh를 안두는 이유는? 어차피 오류하나뜨면 다 전파되서 다 취소된다.
          */
         viewLifecycleOwner.lifecycleScope.launch {
+            /**
+             * 이거 꼭 써야하나?
+             * Started?
+             */
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     /**
                      *  반드시 collectLatest , 이전데이터를 무효화하기 떄문에
                      */
+
                     imageSearchViewModel.pagingFlow.collectLatest { items ->
                         // 검색 데이터 갱신
                         adapter.submitData(items)
                     }
                 }
+                /**
+                 *  컬렉트 레이티스트의 장점을 그냥 말하기
+                 */
                 launch {
                     adapter.loadStateFlow.collectLatest {
                         // 검색 결과 이벤트 처리

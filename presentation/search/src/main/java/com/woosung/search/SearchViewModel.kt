@@ -40,11 +40,16 @@ class SearchViewModel @Inject constructor(
         handleException(exception)
     }
 
-
+    /**
+     *
+     */
     init {
         _storeDocumentListFlow.value = getBookMarkImageUseCase()
     }
 
+    /**
+     * Paging flow
+     */
     @OptIn(ExperimentalCoroutinesApi::class)
     val pagingFlow = _queryFlow.flatMapLatest {
         getImageForPagingUseCase(it)
@@ -78,6 +83,11 @@ class SearchViewModel @Inject constructor(
     }
 
 
+    /**
+     * 듣기로는 말은 X, ~라고 알고 있습니다.
+     *
+     * @param document
+     */
     fun toggle(document: Document) = viewModelScope.launch(_errorHandler) {
         toggleBookMarkUseCase(document)
         val result = getBookMarkImageUseCase()

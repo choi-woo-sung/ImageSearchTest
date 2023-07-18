@@ -2,13 +2,25 @@ package com.woosung.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.woosung.data.local.SearchSharedPreference
 import com.woosung.data.remote.SearchRemoteDataSource
 import com.woosung.domain.model.Document
 import com.woosung.domain.model.DocumentWithKey
 
+
+/**
+ * refresh ->
+ * scroll 이슈가 있었다.
+ *
+ * @property query
+ * @property dataSource
+ * @property sharedPreference
+ * @constructor Create empty Search paging source
+ */
 class SearchPagingSource(
     private val query: String,
-    private val dataSource: SearchRemoteDataSource
+    private val dataSource: SearchRemoteDataSource,
+    private val sharedPreference: SearchSharedPreference
 ) : PagingSource<Int, DocumentWithKey>() {
 
     override fun getRefreshKey(state: PagingState<Int, DocumentWithKey>): Int? {
@@ -30,6 +42,7 @@ class SearchPagingSource(
                 if (!imageResponse.info.isEnd || !vClipResponse.info.isEnd) page + 1 else null
 
             val data = mutableListOf<DocumentWithKey>()
+
 
             if (imageResponse.imageList.isNotEmpty()) data.addAll(imageResponse.imageList.map {
                 DocumentWithKey(

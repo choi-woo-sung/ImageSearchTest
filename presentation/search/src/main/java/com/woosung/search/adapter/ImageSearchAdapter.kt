@@ -65,7 +65,7 @@ class ImageSearchAdapter(private val toggleListener: (Document) -> Unit) :
      */
     fun setCollectionDocuments(documents: LinkedHashSet<Document>) {
         this.collectionDocuments = documents
-        notifyDataSetChanged()
+        this.refresh()
     }
 
 
