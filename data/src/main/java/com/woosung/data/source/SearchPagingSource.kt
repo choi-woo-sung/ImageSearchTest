@@ -44,18 +44,38 @@ class SearchPagingSource(
             val data = mutableListOf<DocumentWithKey>()
 
 
-            if (imageResponse.imageList.isNotEmpty()) data.addAll(imageResponse.imageList.map {
-                DocumentWithKey(
-                    page,
-                    it
-                )
-            })
-            if (vClipResponse.videoList.isNotEmpty()) data.addAll(vClipResponse.videoList.map {
-                DocumentWithKey(
-                    page,
-                    it
-                )
-            })
+            if (imageResponse.imageList.isNotEmpty()) {
+                data.addAll(imageResponse.imageList.map {
+                    DocumentWithKey(
+                        page,
+                        it
+                    )
+                })
+            }
+            if (vClipResponse.videoList.isNotEmpty()) {
+                data.addAll(vClipResponse.videoList.map {
+                    DocumentWithKey(
+                        page,
+                        it
+                    )
+                })
+            }
+
+
+            //contatins에 포함된 것만 수정한다.
+
+            data.forEachIndexed { index, documentWithKey ->
+
+                if (sharedPreference.getDocuments().contains(documentWithKey.document)) {
+                    val prevValue = data[index]
+                    data[index] = prevValue.copy(
+                        isBookMarked = true
+                    )
+                }
+            }
+
+
+
 
             LoadResult.Page(
                 // dateTime 내림차순 정렬

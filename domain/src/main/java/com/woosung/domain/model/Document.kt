@@ -13,7 +13,8 @@ import com.woosung.domain.DomainModel
 
 data class DocumentWithKey(
     val key: Int,
-    val document: Document
+    val document: Document,
+    val isBookMarked: Boolean = false
 ) : DomainModel
 
 
