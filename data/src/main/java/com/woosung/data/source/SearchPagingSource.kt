@@ -6,6 +6,8 @@ import com.woosung.data.local.SearchSharedPreference
 import com.woosung.data.remote.SearchRemoteDataSource
 import com.woosung.domain.model.Document
 import com.woosung.domain.model.DocumentWithKey
+import com.woosung.domain.model.Image
+import com.woosung.domain.model.Video
 
 
 /**
@@ -65,17 +67,27 @@ class SearchPagingSource(
             //contatins에 포함된 것만 수정한다.
 
             data.forEachIndexed { index, documentWithKey ->
-
                 if (sharedPreference.getDocuments().contains(documentWithKey.document)) {
                     val prevValue = data[index]
-                    data[index] = prevValue.copy(
-                        isBookMarked = true
-                    )
+                    when (documentWithKey.document) {
+                        is Image -> {
+                            data[index] = prevValue.copy(
+                                document = (documentWithKey.document as Image).copy(
+                                    isBookMarked = true
+                                )
+                            )
+                        }
+
+                        is Video -> {
+                            data[index] = prevValue.copy(
+                                document = (documentWithKey.document as Video).copy(
+                                    isBookMarked = true
+                                )
+                            )
+                        }
+                    }
                 }
             }
-
-
-
 
             LoadResult.Page(
                 // dateTime 내림차순 정렬

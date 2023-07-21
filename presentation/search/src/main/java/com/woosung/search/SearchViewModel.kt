@@ -94,6 +94,10 @@ class SearchViewModel @Inject constructor(
         _storeDocumentListFlow.update { result }
     }
 
+    fun update(){
+
+    }
+
     /**
      * Coroutine Task 실행하며 감지되지 않은 예외케이스를 처리 합니다.
      *

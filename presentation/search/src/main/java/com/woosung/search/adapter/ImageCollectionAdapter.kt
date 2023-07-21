@@ -23,7 +23,7 @@ class ImageCollectionAdapter(private val toggleListener: (Document) -> Unit) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ImageSearchViewHolder) {
             val document = getItem(position)
-            holder.bind(document, true)
+            holder.bind(document/*, document.isBookMarked*/)
         }
     }
 

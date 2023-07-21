@@ -28,6 +28,7 @@ internal class SearchRepositoryImpl @Inject constructor(
                 SearchPagingSource(
                     query,
                     searchRemoteDataSource,
+                    searchSharedPreference
                 )
             },
         ).flow

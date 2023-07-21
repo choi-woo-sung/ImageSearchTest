@@ -14,7 +14,6 @@ import com.woosung.domain.DomainModel
 data class DocumentWithKey(
     val key: Int,
     val document: Document,
-    val isBookMarked: Boolean = false
 ) : DomainModel
 
 
@@ -23,4 +22,7 @@ data class DocumentWithKey(
  *
  * @property datetime : 문서 작성시간, ISO 8601 [YYYY]-[MM]-[DD]T[hh]:[mm]:[ss].000+[tz]
  */
-sealed class Document(val dateTime: DateTime) : DomainModel
+sealed class Document() : DomainModel {
+    abstract val dateTime: DateTime
+    abstract val isBookMarked: Boolean
+}

@@ -29,7 +29,7 @@ class ImageSearchViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("SetTextI18n")
-    fun bind(document: Document, isCollect: Boolean) {
+    fun bind(document: Document) {
         // 객체별 이미지 url 구분
         val url = when (document) {
             is Image -> document.thumbnailUrl
@@ -68,7 +68,7 @@ class ImageSearchViewHolder(
         }
 
         // image 보관 여부 표시
-        binding.ivSave.visibility = if (isCollect) View.VISIBLE else View.GONE
+        binding.ivSave.visibility = if (document.isBookMarked) View.VISIBLE else View.GONE
 
         // image 타입 표시
         val type = when (document) {

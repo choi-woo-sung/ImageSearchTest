@@ -10,6 +10,11 @@ interface SearchRepository {
         query: String,
     ): Flow<PagingData<DocumentWithKey>>
 
+    /**
+     * 기존에는 List였는데 LinkedHashSet으로 변경
+     *
+     * @return
+     */
     fun getBookmarkList(): LinkedHashSet<Document>
      fun toggleBookmark(document: Document)
 }

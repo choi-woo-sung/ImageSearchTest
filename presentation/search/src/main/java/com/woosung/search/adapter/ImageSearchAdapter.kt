@@ -29,7 +29,7 @@ class ImageSearchAdapter(private val toggleListener: (Document) -> Unit) :
                         // 최악의 경우 O(n)번째 까지 돈다.
                         // bind마다 호출하기때문에 꽤나 많이 호출될것같음.
                         // 여기서 비용을 줄인다면?
-                        collectionDocuments.contains(uiModel.document)
+//                        collectionDocuments.contains(uiModel.document)
                     )
                 }
 
@@ -64,7 +64,6 @@ class ImageSearchAdapter(private val toggleListener: (Document) -> Unit) :
      * @param documents : 보관함 Documents
      */
     fun setCollectionDocuments(documents: LinkedHashSet<Document>) {
-        this.collectionDocuments = documents
         this.refresh()
     }
 

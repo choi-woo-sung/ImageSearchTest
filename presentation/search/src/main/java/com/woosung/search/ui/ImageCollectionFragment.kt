@@ -27,7 +27,6 @@ class ImageCollectionFragment :
                 imageSearchViewModel.toggle(it)
             }
             recyclerView.adapter = adapter
-
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     imageSearchViewModel.storeDocumentListFlow.collectLatest { documents ->
