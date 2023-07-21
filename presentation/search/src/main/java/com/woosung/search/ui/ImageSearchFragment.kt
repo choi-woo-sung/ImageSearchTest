@@ -12,7 +12,10 @@ import com.woosung.search.SearchViewModel
 import com.woosung.search.adapter.ImageSearchAdapter
 import com.woosung.search.databinding.FragmentImageSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -74,6 +77,17 @@ class ImageSearchFragment :
                         }
                     }
                 }
+                launch {
+                    //새로운 key가 동일한 인스턴스인지 확인한다.
+                    adapter.loadStateFlow.distinctUntilChangedBy { it.refresh }
+                        .filter { it.refresh is LoadState.NotLoading }
+                        .collect {
+                            binding {
+                                recyclerView.scrollToPosition(0)
+                            }
+                        }
+                }
+
                 launch {
                     imageSearchViewModel.storeDocumentListFlow.collect { documents ->
                         adapter.setCollectionDocuments(documents)
